@@ -1,0 +1,50 @@
+import sys
+sys.setrecursionlimit(20000)
+
+
+def pizza(sum,maxsum,list,indexlist,list2,diff,indexfinal):
+
+    length=len(list)
+
+    if length==0:
+        tup=(sum,indexlist)
+        loop(maxsum,tup,diff,list2,indexfinal)
+
+    last=list.pop()
+    sum+=last
+    if sum>maxsum:
+        sum-=last
+        pizza(sum,maxsum,list,indexlist,list2,diff,indexfinal)
+    else:
+        indexlist.append(length)
+        pizza(sum,maxsum,list,indexlist,list2,diff,indexfinal)
+
+
+def loop(maxsum,tup,diff,list2,indexesfinal):
+    sum=0
+    if maxsum-tup[0]<diff:
+        diff=maxsum-tup[0]
+        indexesfinal=tup[1]
+    x=list2.pop()
+    list3=list2.copy()
+    indexlist=[]
+    if len(list2) !=0:
+        pizza(sum,maxsum,list2,indexlist,list3,diff,indexesfinal)
+    if len(list2)==0:
+        print(len(indexesfinal))
+        for i in range(len(indexesfinal)-1,-1,-1):
+            print(indexesfinal[i],end=" ")
+        exit()
+
+
+myfile=open('text.txt')
+maxsum=int(myfile.readline().split()[0])
+list=myfile.readline().split()
+list = [int(i) for i in list]
+a=0
+copylist=list.copy()
+
+diff=list[len(list)-1]
+index=[]
+indexfinal=[]
+pizza(a,maxsum,list,index,copylist,diff,indexfinal)
