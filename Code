@@ -22,7 +22,7 @@ def pizza(sum,maxsum,list,indexlist,list2,diff,indexfinal):
 
 def loop(maxsum,tup,diff,list2,indexesfinal):
     sum=0
-    if maxsum-tup[0]<diff:
+    if maxsum-tup[0]< diff:
         diff=maxsum-tup[0]
         indexesfinal=tup[1]
     x=list2.pop()
@@ -32,19 +32,24 @@ def loop(maxsum,tup,diff,list2,indexesfinal):
         pizza(sum,maxsum,list2,indexlist,list3,diff,indexesfinal)
     if len(list2)==0:
         print(len(indexesfinal))
+        print(diff)
         for i in range(len(indexesfinal)-1,-1,-1):
             print(indexesfinal[i],end=" ")
         exit()
 
+def OpenFile():
 
-myfile=open('text.txt')
-maxsum=int(myfile.readline().split()[0])
-list=myfile.readline().split()
-list = [int(i) for i in list]
-a=0
-copylist=list.copy()
+    myfile=open('text.txt')
+    maxsum=int(myfile.readline().split()[0])
+    list=myfile.readline().split()
+    list = [int(i) for i in list]
+    a=0
+    copylist=list.copy()
 
-diff=list[len(list)-1]
-index=[]
-indexfinal=[]
-pizza(a,maxsum,list,index,copylist,diff,indexfinal)
+    diff=list[len(list)-1]
+    index=[]
+    indexfinal=[]
+    pizza(a,maxsum,list,index,copylist,diff,indexfinal)
+
+
+OpenFile()
